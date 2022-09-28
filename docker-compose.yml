@@ -1,0 +1,33 @@
+---
+version: "3"
+services:
+  backup:
+    image: syncthing/syncthing
+    container_name: backup
+    hostname: backup
+    volumes:
+      - ./var/backup:/var/syncthing
+      - ./bin/entrypoint.sh:/bin/entrypoint.sh
+    ports: 
+      - 8385:8384/tcp
+    restart: unless-stopped
+  workstation:
+    image: syncthing/syncthing
+    container_name: workstation
+    hostname: workstation
+    volumes:
+      - ./var/workstation:/var/syncthing
+      - ./bin/entrypoint.sh:/bin/entrypoint.sh
+    ports: 
+      - 8386:8384/tcp
+    restart: unless-stopped
+  laptop:
+    image: syncthing/syncthing
+    container_name: laptop
+    hostname: laptop
+    volumes:
+      - ./var/laptop:/var/syncthing
+      - ./bin/entrypoint.sh:/bin/entrypoint.sh
+    ports: 
+      - 8387:8384/tcp
+    restart: unless-stopped
